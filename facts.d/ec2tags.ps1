@@ -7,6 +7,9 @@ $filters = @(
 )
 $tags = Get-EC2Tag -Filters $filters
 $tagcollection = $tags.ForEach{
-    $t = $_
-    Write-Host 'ec2_tag_'+$t.key+'='+$t.Value
+  $t = $_
+  If(-Not ($t.key.StartsWith('aws'))){
+    $string = 'ec2_tag_'+$t.key+'='+$t.Value
+    Write-Host $string
+  }
 }
